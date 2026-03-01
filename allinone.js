@@ -17,6 +17,28 @@ process.exit(1);
 }
 }
 
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 3
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  score: {
+    type: Number,
+    default: 0
+  },
+  lastLogin: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+mongoose.model("User", userSchema);
 connectToTheDB();
 
 app.get("/", (req, res) => {
